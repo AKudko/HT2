@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class PageObjectJenkinsTestSimple {
+public class JenkinsTestSimple {
     // Это -- т.н. BaseURL, от него будут строиться все относительные URL'ы
     String base_url = "http://localhost:8080";
 
@@ -61,7 +61,13 @@ public class PageObjectJenkinsTestSimple {
         Assert.assertFalse(forms.isEmpty(), "No forms found!");
 
     }
+@Test
+    public void tstJenkins(){
+    // 1-действие: "Открыть http://localhost:8080/"
+    driver.get(base_url);
+    // 1 страница содержит ссыдку «Manage Jenkins»
 
+}
 
 
 
