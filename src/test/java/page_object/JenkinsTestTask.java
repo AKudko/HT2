@@ -1,5 +1,6 @@
 package page_object;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -100,6 +101,31 @@ public class JenkinsTestTask {
         Assert.assertTrue(page4CreateUser.isFormPresentForReal(),"No suitable forms found!" );
 
     }
+    @Test(dependsOnMethods = { "tstThird" })
+    public void tstFouth(){
 
+        Page4CreateUser page4CreateUser = new Page4CreateUser(driver);
+        page4CreateUser.createUserWithSetFields("someuser","somepassword","somepassword",
+                "Some Full Name", "some@addr.dom");
+        Page5Users page5Users = new Page5Users(driver);
+
+        Assert.assertTrue(page5Users.checkUser("someuser"),"There is no such user");
+    }
+    @Test(dependsOnMethods = { "tstFouth" })
+    public void tstFifth(){
+
+         Page5Users page5Users = new Page5Users(driver);
+         page5Users.deleteUser("username");
+
+        Assert.assertTrue(driver.findElement(By.name("delete")).getText().
+                contains("Are you sure about deleting the user from Jenkins?"), "no requered text");
+    }
+    @Test(dependsOnMethods = { "tstFifth" })
+    public void tstSixth(){
+
+        Page5Users page5Users = new Page5Users(driver);
+        page5Users.confirmDeleteUser();
+        Assert.assertFalse(page5Users.checkUser("someuser"), "User has not deleted");
+    }
 
 }

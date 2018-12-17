@@ -27,7 +27,7 @@ public class Page4CreateUser extends AbstractSomePage {
     @FindBy(name = "email")
     private WebElement email;
 
-    @FindBy(xpath = "//button[@type='Create User']")
+    @FindBy(xpath = "//button[@id='yui-gen1-button']")
     private WebElement create_user_button;
 
     public Page4CreateUser(WebDriver driver) {
